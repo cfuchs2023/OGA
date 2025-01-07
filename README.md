@@ -77,6 +77,15 @@ $DATA/
   |--cache/
 ...
 ```
+### Using trained prompts
+In our paper, we present results obtained atop [TaskRes](https://openaccess.thecvf.com/content/CVPR2023/html/Yu_Task_Residual_for_Tuning_Vision-Language_Models_CVPR_2023_paper.html) and [CoOp](https://link.springer.com/article/10.1007/s11263-022-01653-1). To reproduce the relevant results, you need to download the pre-computed prototypes from [TransCLIP](https://github.com/MaxZanella/transduction-for-vlms). Go to "Pre-computed prototypes" and download the 'Few_shot' folder from the provided drive. Place it in $DATA/clip_tuned_prompts/.
+It should look like
+```
+$DATA/
+|–– clip_tuned_prompts/
+  |--Few_shot/
+...
+```
 
 ### Benchmarks
 Results presented in our paper can be reproduced using main.py. Results are stored in a .json (for quantitites such as average batch accuracy per dataset) and a .pickle (for detailed results such as accuracy per batch), at $DATA/results/.
