@@ -72,7 +72,7 @@ $DATA/
 
 ### Benchmarks
 Results presented in our paper can be reproduced using main.py. Results are stored in a .json (for quantitites such as average batch accuracy per dataset) and a .pickle (for detailed results such as accuracy per batch).
-The randomness is controlled by the parameters --master_seed and --n_runs. For a same tuple of (master_seed, n_runs), the runs generated are always the same. Note that you may still observe slight variations in results depending on your CUDA and PyTorch version or hardware specifications.
+The randomness is controlled by the parameters --master_seed and --n_runs. For a same tuple of (master_seed, n_runs), the runs generated are always the same. Note that you may still observe slight variations in results depending on your CUDA and PyTorch versions or hardware specifications.
 Example :
 ```bash  
 python main.py --data_root_path "E:/DATA" --adapt_method_name "TDA" --datasets 'sun397' 'imagenet' 'fgvc_aircraft' 'eurosat' 'food101' 'caltech101' 'oxford_pets' 'oxford_flowers' 'stanford_cars' 'dtd' 'ucf101'
