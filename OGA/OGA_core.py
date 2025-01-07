@@ -2,6 +2,9 @@
 import torch 
 class GaussAdapt(torch.nn.Module):
     def __init__(self, clip_prototypes, shot_capacity = 8, sig_type = 'RidgeMoorePenrose'):
+        '''shot_capacity: maximum number of stored samples per class.
+        sig_type: type of estimator for teh covariance. One of 'Ridge', 'MoorePenrose' or the recommended 'RidgeMoorePenrose'. 
+        The latter transitions from empirical Bayes Ridge (see https://doi.org/10.1016/j.jmva.2008.01.016) to inverse when more than 4d sampels are available. '''
         super(GaussAdapt, self).__init__()
         assert sig_type in ['RidgeMoorePenrose', 'Ridge', 'MoorePenrose']
         K,d = clip_prototypes.shape
@@ -60,6 +63,7 @@ class GaussAdapt(torch.nn.Module):
                       zs_labels,
                       tau = 0.03,
                       normalize_mu = False):
+        '''This method updates the memory as well as the means and covariance if necessary. '''
         selected_samples = []
         updated = False
         
@@ -157,6 +161,7 @@ class GaussAdapt(torch.nn.Module):
         
     
     def get_MAP(self, y_hat, memory_logits, tau = 0.01, simplex_p = False):
+        '''y_hat: zero shot soft labels. memory_logits: log probabilities obtained from the cached samples. '''
         lambd = 1.0
         assert type(tau) is float or type(lambd) is float
         # Compute gaussian probs
