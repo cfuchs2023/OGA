@@ -33,7 +33,7 @@ $DATA/
 |–– imagenet/
 ```
 # Computing features
-main.py needs to have acces to cached features and targets. Targets must be encoded as a single integer per sample, corresponding to the class index.
+main.py needs to have access to cached features and targets. Targets must be encoded as a single integer per sample, corresponding to the class index.
 features and targets must be stored at root_cache_path/{dataset}/cache for each dataset.
 --root_cache_path defaults to --root_data_path if not precised.
 You can use compute_features.py to compute and store features and labels.
@@ -45,7 +45,7 @@ python compute_features.py  --data_root_path "E:/DATA" --backbone "vit_b16" --da
 # Benchmarks
 
 Results presented in our paper can be reproduced using a command line interface. You must specify the root path --data_root_path where you have installed the datasets, as well as the method to benchmark --adapt_method_name (one of "TDA", "DMN" or "OGA"). Results are stored in run_name.json and run_name.pickles files. You can specify a --run_name for the files or let the code generate default names including all necessary information!
-The randomness is controlled by the parameters --master_seed and --n_runs. For a same tuple of (master_seed, n_runs), the runs generated (order of samples) are always the same. Note that you may still observe slight variations in results depending on your CUDA and PyTorch version, as well as GPU drivers or hardware specifications.
+The randomness is controlled by the parameters --master_seed and --n_runs. For a same tuple of (master_seed, n_runs), the runs generated (order of samples) are always the same. Note that you may still observe slight variations in results depending on your CUDA and PyTorch version or hardware specifications.
 Example :
 ```bash  
 python main.py --data_root_path "E:/DATA" --adapt_method_name "TDA" --datasets 'sun397' 'imagenet' 'fgvc_aircraft' 'eurosat' 'food101' 'caltech101' 'oxford_pets' 'oxford_flowers' 'stanford_cars' 'dtd' 'ucf101'
