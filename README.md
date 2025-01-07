@@ -1,9 +1,12 @@
 # Official Repository of Online Gaussian Adaptation (OGA) for Vision-Language Models (VLMs)
 Authors:
-[Clément Fuchs](https://scholar.google.com/citations?user=ZXWUJ4QAAAAJ&hl=fr&oi=ao),
-[Maxime Zanella](https://scholar.google.com/citations?user=FIoE9YIAAAAJ&hl=fr&oi=ao),
+[Clément Fuchs*](https://scholar.google.com/citations?user=ZXWUJ4QAAAAJ&hl=fr&oi=ao),
+[Maxime Zanella*](https://scholar.google.com/citations?user=FIoE9YIAAAAJ&hl=fr&oi=ao),
 [Christophe De Vleeschouwer](https://scholar.google.com/citations?user=xb3Zc3cAAAAJ&hl=fr&oi=ao).
 
+*Denotes equal contribution
+
+## Overview
 
 <p align="center">
   <img src="images/abstract_barplot_github_version.png" alt="Bar plot" width="700" height="636">
@@ -13,9 +16,9 @@ Authors:
 
 OGA is an online adaptation method which builds a cache of samples with low zero-shot entropy along a data stream. This cache is then used to build a multivariate Gaussian model of the class conditional likelihoods of the observed features, finally computing updated predictions using a pseudo-bayesian Maximum A Posteriori (MAP) estimator. All details can be found in our paper [TODO](https://arxiv.org/).
 The repository also includes a lightweight implementation of [TDA](https://openaccess.thecvf.com/content/CVPR2024/html/Karmanov_Efficient_Test-Time_Adaptation_of_Vision-Language_Models_CVPR_2024_paper.html) and [DMN](https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Dual_Memory_Networks_A_Versatile_Adaptation_Approach_for_Vision-Language_Models_CVPR_2024_paper.html) for training free / zero-shot adaptation without test-time augmentations.
-# Dependencies
+## Dependencies
 The repository is dependent on [PyTorch](https://pytorch.org/) and [openai-clip](https://pypi.org/project/openai-clip/).
-# Datasets
+## Datasets
 Please follow [DATASETS.md](DATASETS.md) to install the datasets.
 You will get a structure with the following dataset names:
 ```
@@ -32,7 +35,7 @@ $DATA/
 |–– ucf101/
 |–– imagenet/
 ```
-# Computing features
+## Computing features
 main.py needs to have access to cached features and targets. Targets must be encoded as a single integer per sample, corresponding to the class index.
 features and targets must be stored at root_cache_path/{dataset}/cache for each dataset.
 --root_cache_path defaults to --root_data_path if not precised.
@@ -42,7 +45,7 @@ Example :
 python compute_features.py  --data_root_path "E:/DATA" --backbone "vit_b16" --datasets 'sun397' 'imagenet' 'fgvc_aircraft' 'eurosat' 'food101' 'caltech101' 'oxford_pets' 'oxford_flowers' 'stanford_cars' 'dtd' 'ucf101'
 ```
 /!\ Warning: The above command line overwrites previous features for the current architecture.
-# Benchmarks
+## Benchmarks
 
 Results presented in our paper can be reproduced using a command line interface. You must specify the root path --data_root_path where you have installed the datasets, as well as the method to benchmark --adapt_method_name (one of "TDA", "DMN" or "OGA"). Results are stored in run_name.json and run_name.pickles files. You can specify a --run_name for the files or let the code generate default names including all necessary information!
 The randomness is controlled by the parameters --master_seed and --n_runs. For a same tuple of (master_seed, n_runs), the runs generated (order of samples) are always the same. Note that you may still observe slight variations in results depending on your CUDA and PyTorch version or hardware specifications.
@@ -50,5 +53,15 @@ Example :
 ```bash  
 python main.py --data_root_path "E:/DATA" --adapt_method_name "TDA" --datasets 'sun397' 'imagenet' 'fgvc_aircraft' 'eurosat' 'food101' 'caltech101' 'oxford_pets' 'oxford_flowers' 'stanford_cars' 'dtd' 'ucf101'
 ```
+## Citation
 
+If you find this repository useful, please consider citing our paper:
+```
+@article{
+}
+```
+
+## Contact
+
+For any inquiries, please contact us at [clement.fuchs@uclouvain.be](mailto:clement.fuchs@uclouvain.be) and  [maxime.zanella@uclouvain.be](mailto:maxime.zanella@uclouvain.be) or feel free to [create an issue](https://github.com/cfuchs2023/OGA/issues).
 
