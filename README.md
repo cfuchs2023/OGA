@@ -18,7 +18,18 @@ OGA is an online adaptation method which builds a cache of samples with low zero
   <em>Figure 1. The presented results are averaged over 100 runs. We propose the Expected Tail Accuracy (ETA), i.e., the average over the 10% worst runs, in solid red line. Our method named OGA not only significantly outperforms competitors on average but also has an ETA exceeding their average accuracy on several datasets (e.g., ImageNet and Pets). See our paper [TODO](https://arxiv.org/)</em>
 </p>
 
-The repository also includes a lightweight implementation of [TDA](https://openaccess.thecvf.com/content/CVPR2024/html/Karmanov_Efficient_Test-Time_Adaptation_of_Vision-Language_Models_CVPR_2024_paper.html) and [DMN](https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Dual_Memory_Networks_A_Versatile_Adaptation_Approach_for_Vision-Language_Models_CVPR_2024_paper.html) for training free / zero-shot adaptation without test-time augmentations.
+The repository also includes a lightweight implementation of [TDA](https://openaccess.thecvf.com/content/CVPR2024/html/Karmanov_Efficient_Test-Time_Adaptation_of_Vision-Language_Models_CVPR_2024_paper.html) and [DMN](https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Dual_Memory_Networks_A_Versatile_Adaptation_Approach_for_Vision-Language_Models_CVPR_2024_paper.html) for training free / zero-shot adaptation without test-time augmentations. OGA exhibits strong performances, shown as averages over 11 datasets for 5 different architectures in the following table.
+|                      |                     | ViT-B/16 | ViT-B/32 | ViT-L/14 | ResNet50 | ResNet101 |
+|----------------------|---------------------|----------|----------|----------|----------|-----------|
+| **Standard Prompts** | **Zero-Shot**      | 65.3     | 61.9     | 72.6     | 58.7     | 59.5      |
+|                      | TDA                | *67.7*   | *62.3*   | 73.5     | *59.3*   | 60.6      |
+|                      | DMN                | 67.5     | 61.8     | *73.7*   | 58.6     | *61.0*    |
+|                      | **OGA (ours)**     | **68.5** | **62.9** | **74.3** | **59.8** | **61.6**  |
+| **Custom Ensemble**  | **Zero-Shot**      | 65.6     | 61.4     | 72.2     | 57.4     | 59.0      |
+|                      | TDA                | *66.9*   | *62.3*   | 73.9     | *58.1*   | 59.4      |
+|                      | DMN                | 66.4     | 61.6     | *74.4*   | 57.2     | *60.3*    |
+|                      | **OGA (ours)**     | **67.3** | **62.8** | **74.7** | **58.4** | **60.6**  |
+
 ## Dependencies
 The repository is dependent on [PyTorch](https://pytorch.org/) and [openai-clip](https://pypi.org/project/openai-clip/).
 ## Datasets
@@ -38,24 +49,35 @@ $DATA/
 |–– ucf101/
 |–– imagenet/
 ```
-## Computing features
-main.py needs to have access to cached features and targets. Targets must be encoded as a single integer per sample, corresponding to the class index.
-features and targets must be stored at root_cache_path/{dataset}/cache for each dataset.
---root_cache_path defaults to --root_data_path if not precised.
-You can use compute_features.py to compute and store features and labels.
+## Running benchmarks
+### Computing and storing features
+The benchmarks are run using pre-computed features, as none of the available methods update the vision encoder. 
+First, use compute_features.py to compute and store features and labels.
 Example : 
 ```bash
 python compute_features.py  --data_root_path "E:/DATA" --backbone "vit_b16" --datasets 'sun397' 'imagenet' 'fgvc_aircraft' 'eurosat' 'food101' 'caltech101' 'oxford_pets' 'oxford_flowers' 'stanford_cars' 'dtd' 'ucf101'
 ```
 /!\ Warning: The above command line overwrites previous features for the current architecture.
-## Benchmarks
+The features and targets are stored in a "cache" subfolder within each dataset folder. It should look like
+```
+$DATA/
+|–– caltech-101/
+  |--cache/
+|–– oxford_pets/
+  |--cache/
+|–– stanford_cars/
+  |--cache/
+...
+```
 
-Results presented in our paper can be reproduced using a command line interface. You must specify the root path --data_root_path where you have installed the datasets, as well as the method to benchmark --adapt_method_name (one of "TDA", "DMN" or "OGA"). Results are stored in run_name.json and run_name.pickles files. You can specify a --run_name for the files or let the code generate default names including all necessary information!
-The randomness is controlled by the parameters --master_seed and --n_runs. For a same tuple of (master_seed, n_runs), the runs generated (order of samples) are always the same. Note that you may still observe slight variations in results depending on your CUDA and PyTorch version or hardware specifications.
+### Benchmarks
+Results presented in our paper can be reproduced using main.py. Results are stored in a .json (for quantitites such as average batch accuracy per dataset) and a .pickle (for detailed results such as accuracy per batch).
+The randomness is controlled by the parameters --master_seed and --n_runs. For a same tuple of (master_seed, n_runs), the runs generated are always the same. Note that you may still observe slight variations in results depending on your CUDA and PyTorch version or hardware specifications.
 Example :
 ```bash  
 python main.py --data_root_path "E:/DATA" --adapt_method_name "TDA" --datasets 'sun397' 'imagenet' 'fgvc_aircraft' 'eurosat' 'food101' 'caltech101' 'oxford_pets' 'oxford_flowers' 'stanford_cars' 'dtd' 'ucf101'
 ```
+
 ## Citation
 
 If you find this repository useful, please consider citing our paper:
