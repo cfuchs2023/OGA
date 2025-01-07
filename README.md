@@ -10,7 +10,24 @@ Authors:
 
 ## Overview
 
-OGA is an online adaptation method which builds a cache of samples with low zero-shot entropy along a data stream. This cache is then used to build a multivariate Gaussian model of the class conditional likelihoods of the observed features, finally computing updated predictions using a pseudo-bayesian Maximum A Posteriori (MAP) estimator. All details can be found in our paper [TODO](https://arxiv.org/).
+**OGA** is an online adaptation method which builds a cache of samples with low zero-shot entropy along a data stream. This cache is then used to build a multivariate Gaussian model of the class conditional likelihoods of the observed features, finally computing updated predictions using a pseudo-bayesian Maximum A Posteriori (MAP) estimator. Main results averaged over 11 datasets are summarized in the 2 Tables below.
+
+| W/ standard prompts         | **ViT-B/16** | **ViT-B/32** | **ViT-L/14** | **ResNet50** | **ResNet101** |
+|----------------------|--------------|--------------|--------------|--------------|---------------|
+| Zero-Shot       | 65.3         | 61.9         | 72.6         | 58.7         | 59.5          |
+| TDA             | 67.7 `↑2.4`  | 62.3 `↑0.4`  | 73.5 `↑0.9`  | 59.3 `↑0.6`  | 60.6 `↑1.1`   |
+| DMN             | 67.5 `↑2.2`  | 61.8 `↓0.1`  | 73.7 `↑1.1`  | 58.6 `↓0.1`  | 61.0 `↑1.5`   |
+| **OGA (ours)**      | **68.5 `↑3.2`**  | **62.9 `↑1.0`**  | **74.3 `↑1.7`**  | **59.8 `↑1.1`**  | **61.6 `↑2.1`**   |
+
+
+| W/ custom prompts          | **ViT-B/16** | **ViT-B/32** | **ViT-L/14** | **ResNet50** | **ResNet101** |
+|----------------------|--------------|--------------|--------------|--------------|---------------|
+| Zero-Shot       | 65.6         | 61.4         | 72.2         | 57.4         | 59.0          |
+| TDA             | 66.9 `↑1.3`  | 62.3 `↑0.9`  | 73.9 `↑1.7`  | 58.1 `↑0.7`  | 59.4 `↑0.4`   |
+| DMN             | 66.4 `↑0.8`  | 61.6 `↑0.2`  | 74.4 `↑2.2`  | 57.2 `↓0.2`  | 60.3 `↑1.3`   |
+| **OGA (ours)**      | **67.3 `↑1.7`**  | **62.8 `↑1.4`**  | **74.7 `↑2.5`**  | **58.4 `↑1.0`**  | **60.6 `↑1.6`**   |
+
+Additionally, we advocate for more rigorous evaluation practices, including increasing the number of runs and considering additional quantitative metrics, such as our proposed Expected Tail Accuracy (ETA), calculated as the average accuracy in the worst 10% of runs. See illustration below.
 
 <p align="center">
   <img src="images/abstract_barplot_github_version.png" alt="Bar plot" width="700" height="636">
@@ -19,16 +36,7 @@ OGA is an online adaptation method which builds a cache of samples with low zero
 </p>
 
 The repository also includes a lightweight implementation of [TDA](https://openaccess.thecvf.com/content/CVPR2024/html/Karmanov_Efficient_Test-Time_Adaptation_of_Vision-Language_Models_CVPR_2024_paper.html) and [DMN](https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Dual_Memory_Networks_A_Versatile_Adaptation_Approach_for_Vision-Language_Models_CVPR_2024_paper.html) for training free / zero-shot adaptation without test-time augmentations. OGA exhibits strong performances, shown as averages over 11 datasets for 5 different architectures in the following table.
-|                      |                     | ViT-B/16 | ViT-B/32 | ViT-L/14 | ResNet50 | ResNet101 |
-|----------------------|---------------------|----------|----------|----------|----------|-----------|
-| **Standard Prompts** | **Zero-Shot**      | 65.3     | 61.9     | 72.6     | 58.7     | 59.5      |
-|                      | TDA                | <ins>67.7</ins>   | <ins>62.3</ins>   | 73.5     | <ins>59.3</ins>  | 60.6      |
-|                      | DMN                | 67.5     | 61.8     | <ins>73.7</ins>   | 58.6     | <ins>61.0</ins>  |
-|                      | **OGA (ours)**     | **68.5** | **62.9** | **74.3** | **59.8** | **61.6**  |
-| **Custom Ensemble**  | **Zero-Shot**      | 65.6     | 61.4     | 72.2     | 57.4     | 59.0      |
-|                      | TDA                | <ins>66.9</ins>  | <ins>62.3</ins> | 73.9     | <ins>58.1</ins>  | 59.4      |
-|                      | DMN                | 66.4     | 61.6     | <ins>74.4</ins>  | 57.2     | <ins>60.3</ins>  |
-|                      | **OGA (ours)**     | **67.3** | **62.8** | **74.7** | **58.4** | **60.6**  |
+
 
 ## Dependencies
 The repository is dependent on [PyTorch](https://pytorch.org/) and [openai-clip](https://pypi.org/project/openai-clip/).
@@ -89,4 +97,7 @@ If you find this repository useful, please consider citing our paper:
 ## Contact
 
 For any inquiries, please contact us at [clement.fuchs@uclouvain.be](mailto:clement.fuchs@uclouvain.be) and  [maxime.zanella@uclouvain.be](mailto:maxime.zanella@uclouvain.be) or feel free to [create an issue](https://github.com/cfuchs2023/OGA/issues).
+
+## Acknowledgment
+This repository is mainly based on [CLIP](https://github.com/openai/CLIP) and [TransCLIP](https://github.com/MaxZanella/transduction-for-vlms). 
 
