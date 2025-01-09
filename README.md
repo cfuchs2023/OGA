@@ -1,6 +1,6 @@
 # Online Gaussian Adaptation of Vision-Language Models (OGA)
 <a href="https://arxiv.org/abs/2501.04352" style="vertical-align:middle; display:inline;">
-    <img src="https://img.shields.io/badge/cs.CV-arXiv%3A2501.03729-B31B1B.svg" class="plain" style="height:25px;" />
+    <img src="https://img.shields.io/badge/cs.CV-arXiv%3A2501.04352-B31B1B.svg" class="plain" style="height:25px;" />
 </a>
 
 The official repository of the paper [*Online Gaussian Adaptation of Vision-Language Model*](https://arxiv.org/abs/2501.04352).
