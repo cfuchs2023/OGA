@@ -1,5 +1,9 @@
 # Online Gaussian Adaptation of Vision-Language Models (OGA)
-The official repository of the paper [*Online Gaussian Adaptation of Vision-Language Model*]().
+<a href="https://arxiv.org/abs/2501.04352" style="vertical-align:middle; display:inline;">
+    <img src="https://img.shields.io/badge/cs.CV-arXiv%3A2501.03729-B31B1B.svg" class="plain" style="height:25px;" />
+</a>
+
+The official repository of the paper [*Online Gaussian Adaptation of Vision-Language Model*](https://arxiv.org/abs/2501.04352).
 
 Authors:
 [Clément Fuchs*](https://scholar.google.com/citations?user=ZXWUJ4QAAAAJ&hl=fr&oi=ao),
@@ -32,7 +36,7 @@ Additionally, we advocate for more rigorous evaluation practices, including incr
 <p align="center">
   <img src="images/abstract_barplot_github_version.png" alt="Bar plot" width="700" height="636">
   <br>
-  <em>Figure 1. The presented results are averaged over 100 runs. We propose the Expected Tail Accuracy (ETA), i.e., the average over the 10% worst runs, in solid red line. Our method named OGA not only significantly outperforms competitors on average but also has an ETA exceeding their average accuracy on several datasets (e.g., ImageNet and Pets). See our paper [TODO](https://arxiv.org/)</em>
+  <em>Figure 1. The presented results are averaged over 100 runs. We propose the Expected Tail Accuracy (ETA), i.e., the average over the 10% worst runs, in solid red line. Our method named OGA not only significantly outperforms competitors on average but also has an ETA exceeding their average accuracy on several datasets (e.g., ImageNet and Pets). See our paper https://arxiv.org/abs/2501.04352</em>
 </p>
 
 The repository also includes a lightweight implementation of [TDA](https://openaccess.thecvf.com/content/CVPR2024/html/Karmanov_Efficient_Test-Time_Adaptation_of_Vision-Language_Models_CVPR_2024_paper.html) and [DMN](https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Dual_Memory_Networks_A_Versatile_Adaptation_Approach_for_Vision-Language_Models_CVPR_2024_paper.html) for training free / zero-shot adaptation without test-time augmentations.
@@ -99,7 +103,11 @@ python main.py --data_root_path "E:/DATA" --adapt_method_name "TDA" --datasets '
 
 If you find this repository useful, please consider citing our paper:
 ```
-@article{
+@article{fuchs2025online,
+title={Online Gaussian Test-Time Adaptation of Vision-Language Models},
+author={Fuchs, Cl{\'e}ment and Zanella, Maxime and De Vleeschouwer, Christophe}
+journal={arXiv preprint arXiv:2501.03729},
+  year={2025}
 }
 ```
 
