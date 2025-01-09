@@ -106,7 +106,7 @@ If you find this repository useful, please consider citing our paper:
 @article{fuchs2025online,
 title={Online Gaussian Test-Time Adaptation of Vision-Language Models},
 author={Fuchs, Cl{\'e}ment and Zanella, Maxime and De Vleeschouwer, Christophe}
-journal={arXiv preprint arXiv:2501.03729},
+journal={arXiv preprint arXiv:2501.04352},
   year={2025}
 }
 ```
