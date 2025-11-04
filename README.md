@@ -82,7 +82,7 @@ $DATA/
 ...
 ```
 ### Using trained prompts
-In our paper, we present results obtained atop [TaskRes](https://openaccess.thecvf.com/content/CVPR2023/html/Yu_Task_Residual_for_Tuning_Vision-Language_Models_CVPR_2023_paper.html) and [CoOp](https://link.springer.com/article/10.1007/s11263-022-01653-1). To reproduce the relevant results, you need to download the pre-computed prototypes from [TransCLIP](https://github.com/MaxZanella/transduction-for-vlms). Go to "Pre-computed prototypes" and download the 'Few_shot' folder from the provided drive. Place it in $DATA/clip_tuned_prompts/.
+In our paper, we present results obtained atop [TaskRes](https://openaccess.thecvf.com/content/CVPR2023/html/Yu_Task_Residual_for_Tuning_Vision-Language_Models_CVPR_2023_paper.html) and [CoOp](https://link.springer.com/article/10.1007/s11263-022-01653-1). To reproduce the relevant results, you need to download the pre-computed prototypes from [TransCLIP](https://github.com/MaxZanella/transduction-for-vlms) or from this Zenodo [link](https://zenodo.org/records/17520240?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6ImYyNDcwMTQxLWJjNWItNDYwNC05OGNjLWUzNzFjYjVkMTA3YyIsImRhdGEiOnt9LCJyYW5kb20iOiJjNjQ3N2JhMjgzMmE0ZmY2NDM5ODQwNjBkOWQwZjBjMCJ9.0p31xXH2AyTFeeWJs548D8MQeZp3DX0AVDN6NAreqV-eM4hSj7TKWTyY8KjsgFG0k26b2QOf8nsAQ_dJY0dEPw). Go to "Pre-computed prototypes" and download the 'Few_shot' folder from the provided drive. Place it in $DATA/clip_tuned_prompts/.
 It should look like
 ```
 $DATA/
